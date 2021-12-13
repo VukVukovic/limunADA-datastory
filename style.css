@@ -1,0 +1,57 @@
+body {
+
+}
+
+.wrapper {
+	-webkit-transform: translate3d(0,0,0);
+}
+
+.slide {
+	-webkit-transform: translate3d(0,0,0);
+}
+
+.section {
+	-webkit-transform: translate3d(0,0,0);
+}
+
+.fp-controlArrow.fp-prev {
+	left: 40px;
+}
+
+.fp-controlArrow.fp-next {
+	right: 40px;
+}
+
+#fp-nav ul li a span, .fp-slidesNav ul li a span {
+	background: #fff;
+}
+
+#header {
+	position: absolute;
+	width: 100%;
+	top: 0;
+	z-index: 3;
+}
+
+#logo {
+	height: 60px;
+}
+
+#myMenu li {
+	display: inline;
+	margin-right: 8px;
+	text-transform: uppercase;
+	font-family: 'Raleway', sans-serif;
+	font-weight: 700;
+	font-size: 20px;
+}
+
+#myMenu li a {
+	text-decoration: none;
+	color:  #fff;
+}
+
+#myMenu li.active {
+	border-bottom: 3px solid #fff;
+	font-weight: 800;
+}
