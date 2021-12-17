@@ -60,11 +60,12 @@
         <hr class="subtlered" />
         <div class="row">
           <div class="col-12 col-md-7">
+            <div class="text-center font-raleway color-subtlered h4" id="radios_democrates"></div>
             <div id="clusters_democrates"></div>
           </div>
           <div class="col-12 col-md-5 align-items-center">
             <div id="topic_democrates" class="h2 text-center font-opensans-bold"></div>
-            <div id="cloud_democrates"></div>
+            <div style="height: 240px;"><canvas id="cloud_democrates"></canvas></div>
             <div id="info_democrates" class="text-justify font-opensans"></div>
           </div>
         </div>
@@ -72,42 +73,9 @@
     </div>
     <div class="section fp-auto-height">
       <div class="container">
-        <canvas id="myChart" width="400" height="400"></canvas>
+        
       </div>
       <br /><br /><br />
-      
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.2/chart.min.js" integrity="sha512-tMabqarPtykgDtdtSqCL3uLVM0gS1ZkUAVhRFu1vSEFgvB73niFQWJuvviDyBGBH22Lcau4rHB5p2K2T0Xvr6Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-      <script src="https://unpkg.com/chartjs-chart-wordcloud@3.6.0/build/index.umd.min.js"></script>
-
-      <script>
-        const ctx = document.getElementById('myChart').getContext('2d');
-        const words = ['Hello', 'world', 'normally', 'you', 'want', 'more', 'words', 'than', 'this'];
-        const config = {
-  type: 'wordCloud',
-  data: {
-    // text
-    labels: words,
-    datasets: [
-      {
-        data: words.map(w => Math.random() * 50 + 30),
-        color: 'red'
-      },
-    ],
-  },
-  options: {
-    plugins : {
-      tooltip: {
-          enabled: false
-      },
-      legend: {
-        display: false
-      }
-    }
-  }
-};
-        const myChart = new Chart(ctx, config);
-        </script>
-
     </div>
     <div class="section fp-auto-height">
       <div class="container p-3">
@@ -151,6 +119,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-cloud/1.2.5/d3.layout.cloud.min.js" integrity="sha512-HjKxWye8lJGPu5q1u/ZYkHlJrJdm6KGr89E6tOrXeKm1mItb1xusPU8QPcKVhP8F9LjpZT7vsu1Fa+dQywP4eg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <!-- Chart.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.2/chart.min.js" integrity="sha512-tMabqarPtykgDtdtSqCL3uLVM0gS1ZkUAVhRFu1vSEFgvB73niFQWJuvviDyBGBH22Lcau4rHB5p2K2T0Xvr6Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <!-- Chart.js word clouds -->
+  <script src="https://unpkg.com/chartjs-chart-wordcloud@3.6.0/build/index.umd.min.js"></script>
 
   <!-- Custom js -->
   <script src="script.js"></script>
@@ -159,7 +131,7 @@
   <script type="text/javascript" src="data/data_story_democrates_2017.js"></script>
   <script type="text/javascript">
     $(document).ready(function() {
-      createClusterDisplay(data, 'clusters_democrates', 'topic_democrates', 'cloud_democrates', 'info_democrates');
+      createClusterDisplay(data, 'radios_democrates', 'clusters_democrates', 'topic_democrates', 'cloud_democrates', 'info_democrates');
     });
   </script>
 </body>

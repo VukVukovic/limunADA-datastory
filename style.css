@@ -162,3 +162,8 @@ hr.subtlered:before {
 	left: 50%;
 	margin: 0 0 0 -10px;
 }
+  
+.form-check-input:checked {
+	background-color: #FF6663 !important;
+	border-color: #eb5855 !important;
+}

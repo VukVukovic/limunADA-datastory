@@ -14,34 +14,65 @@ $(document).ready(function() {
 	$.fn.fullpage.setAllowScrolling(true);
 });
 
-function createClusterDisplay(data, plot_id, topic_id, cloud_id, info_id)  {
+function createClusterDisplay(data, radios_id, plot_id, topic_id, cloud_id, info_id)  {
 	plot = $('#' + plot_id);
 	cloud = $('#' + cloud_id);
 	topic = $('#' + topic_id);
 	info = $('#' + info_id);
+	radios = $('#' + radios_id);
 
 	const years = Object.keys(data);
 	years.sort((a, b) => a - b);
 
+	const instanceId = 'inst' + Math.floor(1000*Math.random());
+
+	years.forEach(y => {
+		const containg_div = $('<div>', {class: 'form-check form-check-inline'});
+		$('<input>', {class: 'form-check-input', type: 'radio', value: y, id: instanceId+y, name: instanceId}).appendTo(containg_div);
+		$('<label>', {class: 'form-check-label', for:instanceId+y}).text(y).appendTo(containg_div);
+		radios.append(containg_div);
+	});
+
+	$('input[type=radio][name='+instanceId+']').on('change', function() {
+		plotClusters(data[this.value], plot, topic, cloud, info);
+	});
+	
+	$('input[type=radio][name='+instanceId+']').filter('[value="'+years[0]+'"]').attr('checked', true);
 	plotClusters(data[years[0]], plot, topic, cloud, info);
 }
 
-function plotClusters(data, plot, topic, cloud, info) {
+chartClouds = {}
 
+function plotClusters(data, plot, topic, cloud, info) {
+	plot.empty();
+	info.html("");
+	topic.text("");
+	if (cloud in chartClouds) {
+		chartClouds[cloud].destroy();
+	}
+	
 	const d3plot = d3.select(plot[0])
 		.append("svg")
-		.attr("preserveAspectRatio", "xMidYMid meet")
-        .attr("viewBox", "0 0 1 1");
+		.attr("preserveAspectRatio", "xMidYMid meet");
 
+	let minX=1, minY=1, maxX=0, maxY=0;
     data.forEach(d => {
+		const x = d['x'] + 0.5;
+		const y = -d['y'] + 0.5;
+		const r = d['r'] * 0.005;
+		minX = Math.min(minX, x-r);
+		maxX = Math.max(maxX, x+r);
+		minY = Math.min(minY, y-r);
+		maxY = Math.max(maxY, y+r);
+
     	d3plot
     	.append("circle")
         .style("fill", "#FF6663")
 		.style("opacity", "0.6")
         .style("cursor", "pointer")
-        .attr("r", d['r'] * 0.005)
-        .attr("cx", d['x'] + 0.5)
-        .attr("cy", -d['y'] + 0.5)
+        .attr("r", r)
+        .attr("cx", x)
+        .attr("cy", y)
         .on("mouseover", function(){
 			d3.select(this)
 				.style("transform-origin", "center")
@@ -73,12 +104,44 @@ function plotClusters(data, plot, topic, cloud, info) {
 		.attr("y", -d['y'] + 0.5 + 0.015)
 		.style("font-size", "0.04")
 		.style("pointer-events", "none");
-
-		console.log(d['x'] + " " + d['y'] + " " + d['r']);
     });
+	minX -= 0.01;
+	minY -= 0.01;
+	maxX += 0.01;
+	maxY += 0.01;
+	d3plot.attr("viewBox", minX + " " + minY + " " + maxX + " " + maxY);
 }
 
 function createWordcloud(words, cloud) {
+	if (cloud in chartClouds) {
+		chartClouds[cloud].destroy();
+	}
+	const config = {
+		type: 'wordCloud',
+		data: {
+			labels: words.map(w => w.toUpperCase()),
+			datasets: [
+			{
+				data: words.map(w => Math.random() * 25 + 15),
+				color: '#FF6663'
+			}],
+		},
+		options: {
+			plugins : {
+			tooltip: {
+				enabled: false
+			},
+			legend: {
+				display: false,
+			}
+			}
+		}
+	};
+
+    chartClouds[cloud] = new Chart(cloud, config);
+}
+
+function createWordcloud2(words, cloud) {
 	cloud.empty();
 	//cloud.text(JSON.stringify(words));
 
