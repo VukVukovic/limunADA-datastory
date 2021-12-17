@@ -179,3 +179,8 @@ a:hover {
 ul {list-style: none}
 
 li::before {content: "•"; color: #FF6663;}
+
+.font-dancing {
+	font-family: 'Dancing Script', cursive;
+	font-weight: 700;
+}

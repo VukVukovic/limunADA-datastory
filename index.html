@@ -16,6 +16,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600;700;800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 
   <!-- Bootstrap css -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -27,17 +28,22 @@
 </head>
 
 <body>
+  <div class="container">
+    <div class="w-100 text-center mt-4" style="max-width: 900px;margin: 0 auto;">
+      <span class="h1 font-raleway text-uppercase" style="color:#FF6663;">Detection and analysis of major topics addressed by US politicians</span>
+    </div>
+  </div>
   <!-- INTRO -->
   <div class="section">
     <div class="container">
-      <div class="h2 text-center font-raleway text-uppercase mt-2" style="color:#FF6663">Detection and analysis of major topics addressed by US politicians</div>
+      <div class="h2 text-center font-raleway text-uppercase mt-5" style="color:#FF6663">Introduction</div>
       <hr class="subtlered" />
 
       <div class="row">
-        <div class="col-3">
+        <div class="col-12 col-lg-3">
           <img src="img/trump_hilari.png" class="img-fluid" />
         </div>
-        <div class="col-9 my-auto text-justify">The goal of our project is to investigate what are the topics and the problems that US politicians have addressed the most in the period of 2015 until the April of 2020. For this purpose, we used the Quotebank dataset that consists of more than 178M quotations extracted from English articles. We are not only interested to categorize topics, but we also want to dive deeper into specific events that happen during the mentioned period.
+        <div class="col-12 col-lg-9 my-auto text-justify">The goal of our project is to investigate what are the topics and the problems that US politicians have addressed the most in the period of 2015 until the April of 2020. For this purpose, we used the Quotebank dataset that consists of more than 178M quotations extracted from English articles. We are not only interested to categorize topics, but we also want to dive deeper into specific events that happen during the mentioned period.
         </div>
       </div>
       <div class="row mt-2">
@@ -53,7 +59,7 @@
           </ul>
           
           <h4 class="font-raleway color-subtlered">Methodology</h4>
-          Although Jana's mother was worried that her daughter would have to read through 178 million quotations, luckily, we managed to utilize our knowledge from the Applied Data Analysis course! In order to detect major topics addressed among US politicians, we used LDA (Latent Dirichlet Allocation) method. In order to filter the quotations on certain topics, we applied SBERT (Sentence-BERT) model.
+          Although Jana's mother was worried that her daughter would have to read through 178 million quotations, luckily, we managed to utilize our knowledge from the Applied Data Analysis course! In order to detect major topics addressed among US politicians, we used LDA (Latent Dirichlet Allocation) method. We applied SBERT (Sentence-BERT) model for filtering the quotations on certain topics.
         </div>
       </div>
     </div>
@@ -69,6 +75,8 @@
           We used LDA (Latent Dirichlet Allocation) method in order to detect the most important topics. We clustered the quotes for each year with the respect to the party separately. Every quote is assigned a probability that it belongs to a particular cluster. One cluster represents one or more topics. It would be perfect if one cluster is only about one particular topic, but of course, this is not the case. By empirical analysis of different numbers of clusters, we have decided to use 8 clusters for this task. For each cluster, keywords that are assigned to the cluster, as well as a topic name (which we derived based on those keywords) are shown. 
 <br /><br />
 This gives us an insight into what topics were presented mostly in US media. Moreover, it allows us to detect some interesting events. For example, check the year 2018 and Republican's quotations! Isn't it fascinating that there exists a cluster that contains the following keywords: China, trade, war? This clearly shows the importance of the Trade war with China. Many clusters include keywords such as health and budget together. Indeed, the affordability of health care is an important issue in the US.
+<br /><br />
+<i class="text-secondary">Note: The spatial layout of clusters isn't semantically meaningful, it was inherited from the PyLDAVis tool and only helps in visualizing the clusters. The sizes of the words in the word clouds are arbitrary and do not correlate with the word frequencies.</i>
         </div>
       </div>
 
@@ -81,9 +89,10 @@ This gives us an insight into what topics were presented mostly in US media. Mor
           <div id="clusters_democrates"></div>
         </div>
         <div class="col-12 col-md-6 align-items-center">
-          <div id="topic_democrates" class="h2 text-center font-opensans-bold"></div>
+          <div id="topic_democrates" class="h4 text-center font-raleway color-subtlered"></div>
           <div style="height: 240px;"><canvas id="cloud_democrates"></canvas></div>
           <div id="info_democrates" class="text-justify font-opensans"></div>
+          <div id="manual_democrates" class="font-dancing text-center color-subtlered h1"><span class="d-none d-md-inline">←</span><span class="d-inline d-md-none">↑</span> Try clicking one of the topics!</div>
         </div>
       </div>
 
@@ -91,12 +100,13 @@ This gives us an insight into what topics were presented mostly in US media. Mor
         <div class="col-12 mt-2">
           <h4 class="font-raleway color-subtlered">Major topics by Republicans</h4>
         </div>
-        <div class="col-12 col-md-6 align-items-center">
-          <div id="topic_republicans" class="h2 text-center font-opensans-bold"></div>
+        <div class="col-12 col-md-6 align-items-center order-2 order-md-1">
+          <div id="topic_republicans" class="h4 text-center font-raleway color-subtlered"></div>
           <div style="height: 240px;"><canvas id="cloud_republicans"></canvas></div>
           <div id="info_republicans" class="text-justify font-opensans"></div>
+          <div id="manual_republicans" class="font-dancing text-center color-subtlered h1">Try clicking one of the topics! <span class="d-none d-md-inline">→</span><span class="d-inline d-md-none">↑</span></div>
         </div>
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-md-6 order-1 order-md-2">
           <div class="text-center font-raleway color-subtlered h4" id="radios_republicans"></div>
           <div id="clusters_republicans"></div>
         </div>
@@ -181,7 +191,7 @@ This gives us an insight into what topics were presented mostly in US media. Mor
       </div>
       <div class="row">
         <div class="col-12 mt-2 text-justify">
-        We compare the results that we got, with the results obtained by previous study conducted by the Pew Research Center, which can be found <a href="https://www.pewresearch.org/politics/2019/12/17/views-of-the-major-problems-facing-the-country/" target="_blank">here</a>. They investigated what are the differences in views of the major problems among the Republican and Democrat parties. Problems they observed are climate change, economic inequality, racism, sexism, job opportunities, affordability of college education, affordability of health care, drug addiction, federal budget deficit, terrorism, and illegal immigration. They compare percentages of people in each party that consider each of these problems to be big. We tried to get an estimation of this using a different variable: the percentages of quotations related to each topic (out of all quotations) with regard to the party. The first plot shows topics that are taken more seriously by Democrats, while the second plot shows topics that are taken more seriously by Republicans, according to Pew Research. Let us concentrate on the question of who takes some problems more seriously. It is logical to assume that people from that party would also speak more about such problems. We see that our approach differs from results by the Pew Research Center only in the case of drug addiction and job opportunities. However, we also see that in both of those cases differences among Republicans and Democrats are minimal.
+        We compare the results that we got, with the results obtained by previous study conducted by the Pew Research Center, which can be found <a href="https://www.pewresearch.org/politics/2019/12/17/views-of-the-major-problems-facing-the-country/" target="_blank">here</a>. They investigated what are the differences in views of the major problems among the Republican and Democrat parties. Problems they observed are climate change, economic inequality, racism, sexism, job opportunities, affordability of college education, affordability of health care, drug addiction, federal budget deficit, terrorism, and illegal immigration. They compare percentages of people in each party that consider each of these problems to be big. We tried to get an estimation of this using a different variable: the percentages of quotations related to each topic (out of all quotations) with regard to the party. The first plot shows topics that are taken more seriously by Democrats, while the second plot shows topics that are taken more seriously by Republicans, according to Pew Research. Let us concentrate on the question of who takes some problems more seriously. It is logical to assume that people from that party would also speak more about such problems. We see that our approach differs from results by the Pew Research Center only in the case of drug addiction and job opportunities. However, we also see that in both of those cases differences among Republicans and Democrats are minimal. For all the other topics, we see that our results follow a similar trend as results obtained by Pew research, but the ratios are a bit different. For example, we see that in 2019 Democrats addressed the problem of climate change twice more than Democrats, while according to Pew Research, Democrats take that problem four times more seriously than Republicans.
         </div>
       </div>
       <div class="row mt-4">
@@ -225,7 +235,7 @@ This gives us an insight into what topics were presented mostly in US media. Mor
           <span class="h3 text-uppercase font-raleway color-subtlered">Jana Vučković</span>
         </div>
         <div class="col-6 col-md-3 text-center">
-          <img class="change circle img-fluid mb-2" src="img/gojko.png" />
+          <img class="change circle img-fluid mb-2" src="img/gojko.jpeg" />
           <span class="h3 text-uppercase font-raleway color-subtlered">Gojko Čutura</span>
         </div>
         <div class="col-6 col-md-3 text-center">
@@ -246,14 +256,8 @@ This gives us an insight into what topics were presented mostly in US media. Mor
   <!-- Bootstrap + Popper -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js" integrity="sha512-pax4MlgXjHEPfCwcJLQhigY7+N8rt6bVvWLFyUMuxShv170X53TRzGPmPkZmGBhk+jikR8WBM4yl7A9WMHHqvg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-  <!-- fullpage.js -->
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.js" integrity="sha512-gSf3NCgs6wWEdztl1e6vUqtRP884ONnCNzCpomdoQ0xXsk06lrxJsR7jX5yM/qAGkPGsps+4bLV5IEjhOZX+gg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>  -->
-
   <!-- d3.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.2.1/d3.min.js" integrity="sha512-wkduu4oQG74ySorPiSRStC0Zl8rQfjr/Ty6dMvYTmjZw6RS5bferdx8TR7ynxeh79ySEp/benIFFisKofMjPbg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-  <!-- d3-cloud -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-cloud/1.2.5/d3.layout.cloud.min.js" integrity="sha512-HjKxWye8lJGPu5q1u/ZYkHlJrJdm6KGr89E6tOrXeKm1mItb1xusPU8QPcKVhP8F9LjpZT7vsu1Fa+dQywP4eg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <!-- Chart.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.2/chart.min.js" integrity="sha512-tMabqarPtykgDtdtSqCL3uLVM0gS1ZkUAVhRFu1vSEFgvB73niFQWJuvviDyBGBH22Lcau4rHB5p2K2T0Xvr6Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -261,63 +265,13 @@ This gives us an insight into what topics were presented mostly in US media. Mor
   <!-- Chart.js word clouds -->
   <script src="https://unpkg.com/chartjs-chart-wordcloud@3.6.0/build/index.umd.min.js"></script>
 
-  <!-- Custom js -->
-  <script src="script.js"></script>
-
   <!-- Data -->
   <script type="text/javascript" src="data/data_topics_republicans.js"></script>
   <script type="text/javascript" src="data/data_topics_democrates.js"></script>
   <script type="text/javascript" src="data/research_data.js"></script>
   <script type="text/javascript" src="data/total_number_of_quotes.js"></script>
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $('.carousel').carousel()
-      
-      createClusterDisplay(data_topics_democrates, 'radios_democrates', 'clusters_democrates', 'topic_democrates', 'cloud_democrates', 'info_democrates');
-      createClusterDisplay(data_topics_republicans, 'radios_republicans', 'clusters_republicans', 'topic_republicans', 'cloud_republicans', 'info_republicans');
-
-      const topicTrends = [
-      {"topic":"Politics", "data_topics": ["politics"], "text": "Elections in the US were held in 2016, which makes a huge peak of political quotations in that same year, after which we see a huge decay. During the following three years we see an almost linear increase in interest in politics, which might imply that parties started their pre-election campaign. So, in 2020, when another election was held, there must have been a huge peak again! However, we see a decrease in the percentages of quotes related to politics. Why is that? Before you think that there is some mistake here, we remind you that these are percentages of quotes that are related to politics. So, in 2020, there must have been some topic that was so important, even more, important than elections in the US. Unfortunately, we all know what that is. The year 2020 will always be known as a year of break out of COVID-19."},
-      {"topic": "Healthcare", "data_topics": ["health", "affordability of healthcare", "china"], "text":"A huge COVID-19 epidemic breakout happened in 2020, which explains this sharp increase in 2020. The virus was firstly located in China, and that explains why there is also an increase in the percentage of quotes related to China in 2020, especially when it comes to the republican party. Indeed, Donald Trump was not embarrassed to refer to this virus as a \"Chinese virus\". But, except for this big change in 2020, we also see a peak in 2017. What happened then? The program Affordable Care Act (ACA), also known as Obamacare was formed in 2010 but was facing strong political opposition by the republican party. During his presidency, Donal Trump rescinded the federal tax penalty for violating the individual mandate through the Tax Cuts and Jobs Act of 2017. This raised many questions about whether the ACA was still constitutional, which clearly explains this peak."},
-      {"topic":"Foreign relations", "data_topics":["korea", "russia", "china"], "text" : "Here we see what were relationships with the following countries. Let us start with the US-Russian relationship. In 2016, US presidential election took place and there was an accusation that Russian officials helped Donald Trump. This was later investigated from 2017 to 2019 by special prosecutor Robert Mueller, who finally managed to prove this. This was also known as a Mueller investigation. As a result, we see a relatively high presence of Russia-related quotations in the media during 2017, 2018, and 2019.<br /> North Korea is another example of a country with complicated relations with the US. In 2017 President Donald Trump stated: \"There will be fire and fury if the isolated nation makes more threats against the United States\". Tensions between North Korea and the US are getting bigger and bigger. In 2018 Trump met with North Korean President Kim Jong-un for the first time. All these events made a huge impact when it comes to media. Tensions were reduced when a Peace treaty between North Korea and the US was signed. Media prefers to report about crisis rather than peace.<br />US-China relations were indeed complicated for the previous several years. Finally, the US relations with China were not very good either. In January 2018, US President Donald Trump began setting tariffs and other trade barriers on China, which explains the increase in interest in China. Moreover, this interest explodes in 2019 and 2020 when the COVID-19 breakout happened. "},
-      {"topic":"Sexism", "data_topics":["sexism"], "text":"Different political parties addressed this issue almost in the same amounts during 2015 and 2016, but we see that afterward, democrats were in huge favor of this topic. What was so different between 2015 and 2016 in comparison to other years when it comes to sexism? We believe - elections. Remember that in the elections in 2016, Donald Trump and Hillary Clinton were running for president. It is logical to assume that republicans did not want Hillary to gain political points because she was a woman, so they had a strong campaign when it came to women's rights."},
-      {"topic":"Terrorism", "data_topics":["terrorism"], "text": "ISIS was pretty active during 2015 and 2016 which is justified by the terrorist attacks which were performed all around the world. Fortunately, after the actions of the US military, they lost most of their territory by the end of 2017. Therefore, the frequency of quotations on the topic of terrorism has been decreasing."},
-      {"topic":"Climate change", "data_topics":["climate change"], "text":"Except that we see that climate change and the environment is a bigger issue for democrats than republicans, we also see something that might have happened in the year 2019. In June 2019, Donald Trump formally withdraws from Paris Agreement on climate change mitigation. This decision was strongly criticized by Democrats. For this reason, there is a peak in 2019."},
-      {"topic":"Racism", "data_topics":["racism"], "text":"Except for the fact that democrats pay more attention to this particular topic, we also see two peaks - one in 2016 and one in 2019. Why is this? Our guess is the following: Black Lives Matters is a well-known movement against racially motivated violence against black people. Its' activists became involved in elections in 2016, which explains the first peak. Whereas public opinion on Black Lives Matter was net negative in 2018, it grew increasingly popular through 2019 and 2020 which explains the other peak."}
-      ]
-      
-      topicTrends.forEach((tt, i) => 
-        $('#popularity-change-select').append(
-        $('<option>', {value : i}).text(tt['topic']))
-      );
-
-      $('select#popularity-change-select').on('change', function() {
-        plotTopicTrends(research_data, topicTrends[parseInt(this.value)]['data_topics'], 'popularity-trends');
-        $('#popularity-trends').append('<div class="col-6 my-auto">'+topicTrends[parseInt(this.value)]['text']+'</div>');
-      });
-
-      plotTopicTrends(research_data, topicTrends[0]['data_topics'], 'popularity-trends');
-      $('#popularity-trends').append('<div class="col-6 my-auto">'+topicTrends[0]['text']+'</div>');
-
-      //createPopularityPerYear(research_data, 'year-popularity-years', 'year-popularity-chart');
-      const topics = Object.keys(research_data['republicans']['2015']);
-
-      plotComparison(research_data, 
-        ['climate change', 'economic inequality', 'racism', 'sexism', 'job opportunities', 'affordability of healthcare'], 
-        2019, 'popularity-comparison-dem');
-      
-      plotComparison(research_data, 
-        ['drug addiction', 'economy', 'terrorism', 'illegal immigration'], 
-        2019, 'popularity-comparison-rep');
-
-      
-      $('input[type=radio][name=radio-barchart]').on('change', function() {
-        plotBarChart(data_total_number_of_quotes, this.value, 'popularity-barchart');
-      });
-
-      $('input[type=radio][name=radio-barchart]').filter('[value="2019"]').attr('checked', true);
-      plotBarChart(data_total_number_of_quotes, '2019', 'popularity-barchart');
-    });
-  </script>
+  
+  <!-- Custom js -->
+  <script src="script.js"></script>
 </body>
 </html>
