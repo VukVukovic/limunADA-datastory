@@ -167,3 +167,11 @@ hr.subtlered:before {
 	background-color: #FF6663 !important;
 	border-color: #eb5855 !important;
 }
+
+a, a:link {
+	color: #FF6663;
+}
+
+a:hover {
+	color: #b93b39;
+}

@@ -1,19 +1,3 @@
-$(document).ready(function() {
-	$('#fullpage').fullpage({
-		//options here
-		verticalCentered: true,
-		bigSectionsDestination: top,
-		autoScrolling:true,
-		scrollHorizontally: true,
-		navigation: true,
-		anchors: ['firstPage', 'secondPage', 'thirdPage', 'fourthPage', 'fifthPage'],
-		menu: '#myMenu'
-	});
-
-	//methods
-	$.fn.fullpage.setAllowScrolling(true);
-});
-
 function createClusterDisplay(data, radios_id, plot_id, topic_id, cloud_id, info_id)  {
 	plot = $('#' + plot_id);
 	cloud = $('#' + cloud_id);
@@ -34,6 +18,7 @@ function createClusterDisplay(data, radios_id, plot_id, topic_id, cloud_id, info
 	});
 
 	$('input[type=radio][name='+instanceId+']').on('change', function() {
+		console.log('CHANGE' + this.value);
 		plotClusters(data[this.value], plot, topic, cloud, info);
 	});
 	
@@ -47,6 +32,7 @@ function plotClusters(data, plot, topic, cloud, info) {
 	plot.empty();
 	info.html("");
 	topic.text("");
+
 	if (cloud in chartClouds) {
 		chartClouds[cloud].destroy();
 	}
@@ -141,38 +127,145 @@ function createWordcloud(words, cloud) {
     chartClouds[cloud] = new Chart(cloud, config);
 }
 
-function createWordcloud2(words, cloud) {
-	cloud.empty();
-	//cloud.text(JSON.stringify(words));
-
-	words = words.map(function(d) {
-		return {text: d, size: 20 + Math.random() * 10};
-	});
-	var layout = d3.layout.cloud()
-		.size([500, 150])
-		.words(words)
-		.padding(5)
-		.rotate(function() { return ~~(Math.random() * 2) * 90; })
-		.font("Oswald")
-		.fontSize(function(d) { return 10; })
-		.on("end", () => drawCloud(words, layout));
-		layout.start();
+function createPopularityPerYear(data, years_id, chart_id) {
+	yearsDiv = $('#' + years_id);
+	chart = $('#' + chart_id);
 }
 
-function drawCloud(words, layout) {
-	d3.select("#cloud_democrates").append("svg")
-	.attr("preserveAspectRatio", "xMidYMid meet")
-	.attr("viewBox", "0 0 " + layout.size()[0] + " " + layout.size()[1])
-	.append("g")
-	.attr("transform", "translate(" + layout.size()[0] / 2 + "," + layout.size()[1] / 2 + ")")
-	.selectAll("text")
-	.data(words)
-	.enter().append("text")
-	.style("font-size", function(d) { return "10px"; })
-	.style("font-family", "Oswald")
-	.attr("text-anchor", "middle")
-	.attr("transform", function(d) {
-	return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
-	})
-	.text(function(d) { return d.text; });
+var comparisonCharts = {}
+function plotComparison(research_data, topics, year, canvas_id) {
+	
+	const chart_data = {
+        labels: topics.map(t => t.charAt(0).toUpperCase() + t.slice(1)),
+        datasets: [
+          {
+            label: 'Republicans',
+            data: topics.map(t => research_data['republicans'][year][t]),
+            backgroundColor: '#0B3954',
+			stack: 'Stack 0'
+          },
+          {
+            label: 'Democrates',
+            data: topics.map(t => research_data['democrates'][year][t]),
+            backgroundColor: '#E0FF4F',
+			stack: 'Stack 1'
+          }
+        ]
+    };
+
+	const config = {
+        type: 'bar',
+        data: chart_data,
+        options: {
+          responsive: true,
+          interaction: {
+            intersect: false,
+          },
+          scales: {
+            x: {
+              stacked: true,
+            },
+            y: {
+              stacked: true
+            }
+          }
+        }
+    };
+
+	if (canvas_id in comparisonCharts) {
+		comparisonCharts[canvas_id].data.labels = chart_data['labels'];
+		comparisonCharts[canvas_id].data.datasets = chart_data['datasets'];
+		comparisonCharts[canvas_id].update();
+	} else {
+		comparisonCharts[canvas_id] = new Chart($('#' + canvas_id), config);
+	}
+}
+
+function plotTopicTrends(research_data, topics, trends_id) {
+	trends_div = $('#' + trends_id);
+	trends_div.empty();
+
+	const years = Object.keys(research_data['democrates']);
+	years.sort((a, b) => a - b);
+
+	topics.forEach(t => {
+		trends_div.append('<div class="col-6"><div class="text-center h5 font-raleway color-subtlered">'+(t.charAt(0).toUpperCase() + t.slice(1))+'</div><canvas id="'+t.replaceAll(' ', '_')+'"></canvas></div>');
+	});
+
+	topics.forEach(t => {
+		id = t.replaceAll(' ', '_');
+		const labels = years;
+		const data = {
+		labels: labels,
+			datasets: [{
+				label: 'Democrates',
+				data: years.map(y => research_data['democrates'][y][t]),
+				fill: false,
+				borderColor: '#0B3954',
+				tension: 0.1
+			}, 
+			{
+				label: 'Republicans',
+				data: years.map(y => research_data['republicans'][y][t]),
+				fill: false,
+				borderColor: '#E0FF4F',
+				tension: 0.1
+			}]
+		};
+		const config = {
+			type: 'line',
+			data: data,
+		};
+
+		new Chart($('#'+id), config);
+	});
+}
+
+
+var barChartPlot = null;
+function plotBarChart(data_total, year, barchart_id) {
+	let topics = Object.keys(data_total[year]);
+	topics.sort((a, b) => -(data_total[year][a] - data_total[year][b]))
+	topics = topics.slice(0, 10);
+
+	const labels = topics.map(t => t.charAt(0).toUpperCase() + t.slice(1));
+
+	const data = {
+		labels: labels,
+		datasets: [
+			{
+			label: 'Total',
+			data: topics.map(t => data_total[year][t]),
+			borderColor: '#FF6663',
+			backgroundColor: '#FF6663',
+			}
+		]
+	};
+
+	const config = {
+		type: 'bar',
+		data: data,
+		options: {
+		  indexAxis: 'y',
+		  elements: {
+			bar: {
+			  borderWidth: 2,
+			}
+		  },
+		  responsive: true,
+		  plugins: {
+			legend: {
+			  display: false,
+			}
+		  }
+		},
+	};
+
+	if (barChartPlot) {
+		barChartPlot.data.labels = data['labels'];
+		barChartPlot.data.datasets = data['datasets'];
+		barChartPlot.update();
+	} else {
+		barChartPlot = new Chart($('#'+barchart_id), config);
+	}
 }
