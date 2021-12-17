@@ -145,7 +145,7 @@ function plotComparison(research_data, topics, year, canvas_id) {
 			stack: 'Stack 0'
           },
           {
-            label: 'Democrates',
+            label: 'Democrats',
             data: topics.map(t => research_data['democrates'][year][t]),
             backgroundColor: '#E0FF4F',
 			stack: 'Stack 1'
@@ -198,7 +198,7 @@ function plotTopicTrends(research_data, topics, trends_id) {
 		const data = {
 		labels: labels,
 			datasets: [{
-				label: 'Democrates',
+				label: 'Democrats',
 				data: years.map(y => research_data['democrates'][y][t]),
 				fill: false,
 				borderColor: '#0B3954',

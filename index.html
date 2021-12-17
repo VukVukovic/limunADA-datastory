@@ -112,8 +112,12 @@ This gives us an insight into what topics were presented mostly in US media. Mor
       <hr class="subtlered" />
 
       <div class="row">
+        <div class="col-12 mt-2 text-justify">
+          <h4 class="font-raleway color-subtlered">Popularity of major topics</h4>
+          In the previous section, we used LDA models for the detection of topics. After analysis of the obtained clusters, we got an impression what are the most addressed topics. Moreover, we see that there are significant overlaps between topics found in LDA clusters and topics from the study performed by the Pew research. For example, according to the Pew research, affordability of healthcare is a big issue in the US, and indeed health and budget are usually in the same clusters. Here, we decided to fix a set of topics, by taking all the topics mentioned in Pew research, but also some topics that we found interesting after analyzing LDA clusters (politics, China, Russia, Korea, etc). We show what were the most popular topics among this given set of topics during the years.
+        </div>
         <div class="col-12">
-          <div class="text-center font-raleway color-subtlered h4">
+          <div class="text-center font-raleway color-subtlered h4 mt-2">
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="radio-barchart" id="radio-barchart2015" value="2015">
               <label class="form-check-label" for="radio-barchart2015">2015</label>
@@ -146,8 +150,16 @@ This gives us an insight into what topics were presented mostly in US media. Mor
           <canvas id="popularity-barchart"></canvas>
         </div>
       </div>
+      <div class="row">
+        <div class="col-12 text-justify mt-2">
+          For every year, we see that politics is an absolute winner. Second, third, and fourth places are always shared among topics related to crime, economy, and Donald Trump. We also see that job opportunity are an important issue for people in the US.
+        </div>
+      </div>
       
       <div class="row">
+        <div class="col-12 mt-4">
+          <h4 class="font-raleway color-subtlered">Major topic popularity over time</h4>
+        </div>
         <div class="col-12 col-md-6">
           <select class="form-select form-select-md mb-3" aria-label=".form-select-md" id="popularity-change-select"></select>
         </div>
@@ -157,31 +169,54 @@ This gives us an insight into what topics were presented mostly in US media. Mor
       <div id="popularity-trends" class="row"></div>
 
       <div class="row">
-        <div class="row">
-          <div class="col-12 col-md-6 y-auto">
-            <canvas id="popularity-comparison-rep"></canvas>
-          </div>
-          <div class="col-12 col-md-6 y-auto">
-            <img src="img/comparison1.jpg" class="img-fluid" />
-          </div>
+        <div class="col-12 mt-4">
+          <h4 class="font-raleway color-subtlered">Differences in views of major problems</h4>
         </div>
-        <div class="row">
-          <div class="col-12 col-md-6">
-            <img src="img/comparison2.jpg" class="img-fluid" />
-          </div>
-          <div class="col-12 col-md-6">
-            <canvas id="popularity-comparison-dem"></canvas>
-          </div>
+        <div class="col-12 col-md-6 y-auto">
+          <canvas id="popularity-comparison-rep"></canvas>
         </div>
+        <div class="col-12 col-md-6 y-auto">
+          <img src="img/comparison1.jpg" class="img-fluid" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 mt-2 text-justify">
+        We compare the results that we got, with the results obtained by previous study conducted by the Pew Research Center, which can be found <a href="https://www.pewresearch.org/politics/2019/12/17/views-of-the-major-problems-facing-the-country/" target="_blank">here</a>. They investigated what are the differences in views of the major problems among the Republican and Democrat parties. Problems they observed are climate change, economic inequality, racism, sexism, job opportunities, affordability of college education, affordability of health care, drug addiction, federal budget deficit, terrorism, and illegal immigration. They compare percentages of people in each party that consider each of these problems to be big. We tried to get an estimation of this using a different variable: the percentages of quotations related to each topic (out of all quotations) with regard to the party. The first plot shows topics that are taken more seriously by Democrats, while the second plot shows topics that are taken more seriously by Republicans, according to Pew Research. Let us concentrate on the question of who takes some problems more seriously. It is logical to assume that people from that party would also speak more about such problems. We see that our approach differs from results by the Pew Research Center only in the case of drug addiction and job opportunities. However, we also see that in both of those cases differences among Republicans and Democrats are minimal.
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-12 col-md-6">
+          <img src="img/comparison2.jpg" class="img-fluid" />
+        </div>
+        <div class="col-12 col-md-6">
+          <canvas id="popularity-comparison-dem"></canvas>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Team  -->
+  <div class="section">
+    <div class="container p-3 mt-3">
+      <div class="h2 text-center font-raleway text-uppercase" style="color:#FF6663">Conclusion & References</div>
+      <hr class="subtlered" />
+      <div class="row justify-content-center">
+        
+        <ul>
+          <li><a href="https://zenodo.org/record/4277311#.Yb0QV73MIUF" target="_blank">Quotebank Dataset</a></li>
+          <li><a href="https://www.sbert.net/" target="_blank">SBERT (Sentence-BERT)</a></li>
+          <li><a href="https://huggingface.co/sentence-transformers" target="_blank">Huggingface SBERT</a></li>
+          <li><a href="https://radimrehurek.com/gensim/models/ldamodel.html" target="_blank">Gensim LDA model</a></li>
+          <li><a href="https://www.pewresearch.org/politics/2019/12/17/views-of-the-major-problems-facing-the-country/" target="_blank">Pew Research Center - Views of the major problems facing the country</a></li>
+        </ul>
       </div>
     </div>
   </div>
 
-  <!-- -->
-
   <!-- Team  -->
   <div class="section">
-    <div class="container p-3">
+    <div class="container p-3 mt-3">
       <div class="h2 text-center font-raleway text-uppercase" style="color:#FF6663">Meet the &nbsp;<img src="img/logo.png" class="display-inline mb-1" style="height: 30px;"/>limunADA team</div>
       <hr class="subtlered" />
       <div class="row justify-content-center">
