@@ -1,9 +1,10 @@
 $(document).ready(function() {
 	$('#fullpage').fullpage({
 		//options here
+		verticalCentered: true,
+		bigSectionsDestination: top,
 		autoScrolling:true,
 		scrollHorizontally: true,
-		sectionsColor: ['#06AED5', '#9BC53D', '#C3423F', '#F18701', '#272727'],
 		navigation: true,
 		anchors: ['firstPage', 'secondPage', 'thirdPage', 'fourthPage', 'fifthPage'],
 		menu: '#myMenu'
@@ -11,12 +12,6 @@ $(document).ready(function() {
 
 	//methods
 	$.fn.fullpage.setAllowScrolling(true);
-
-	$("img.change").on('mouseenter mouseleave', function(){
-		let src = $(this).attr('src');
-		$(this).attr('src', $(this).data('hoverimg'));
-		$(this).data('hoverimg', src); 
-	});
 });
 
 function createClusterDisplay(data, plot_id, topic_id, cloud_id, info_id)  {
@@ -37,17 +32,12 @@ function plotClusters(data, plot, topic, cloud, info) {
 		.append("svg")
 		.attr("preserveAspectRatio", "xMidYMid meet")
         .attr("viewBox", "0 0 1 1");
-	
-	d3plot.append("circle").style("fill", "red").attr("cx", 0).attr("cy", 0).attr("r", 0.05);
-	d3plot.append("circle").style("fill", "black").attr("cx", 0).attr("cy", 1).attr("r", 0.05);
-	d3plot.append("circle").style("fill", "yellow").attr("cx", 1).attr("cy", 0).attr("r", 0.05);
-	d3plot.append("circle").style("fill", "pink").attr("cx", 1).attr("cy", 1).attr("r", 0.05);
 
     data.forEach(d => {
     	d3plot
     	.append("circle")
-        .style("fill", "#fff")
-		.style("opacity", "0.8")
+        .style("fill", "#FF6663")
+		.style("opacity", "0.6")
         .style("cursor", "pointer")
         .attr("r", d['r'] * 0.005)
         .attr("cx", d['x'] + 0.5)
@@ -58,6 +48,7 @@ function plotClusters(data, plot, topic, cloud, info) {
 				.transition()
 				.ease(d3.easeLinear)
 				.duration(100)
+				.style("opacity", "0.8")
 				.style("transform", "scale(1.1, 1.1)");
 		})
         .on("mouseout", function(){
@@ -66,6 +57,7 @@ function plotClusters(data, plot, topic, cloud, info) {
 				.transition()
 				.ease(d3.easeLinear)
 				.duration(100)
+				.style("opacity", "0.6")
 				.style("transform", "scale(1.0, 1.0)");
 		})
         .on("click", function() {
@@ -79,7 +71,8 @@ function plotClusters(data, plot, topic, cloud, info) {
 		.text(() => d['emoji'])
 		.attr("x", d['x'] + 0.5 - 0.02)
 		.attr("y", -d['y'] + 0.5 + 0.015)
-		.style("font-size", "0.04");
+		.style("font-size", "0.04")
+		.style("pointer-events", "none");
 
 		console.log(d['x'] + " " + d['y'] + " " + d['r']);
     });
@@ -98,7 +91,7 @@ function createWordcloud(words, cloud) {
 		.padding(5)
 		.rotate(function() { return ~~(Math.random() * 2) * 90; })
 		.font("Oswald")
-		.fontSize(function(d) { return d.size; })
+		.fontSize(function(d) { return 10; })
 		.on("end", () => drawCloud(words, layout));
 		layout.start();
 }
@@ -112,7 +105,7 @@ function drawCloud(words, layout) {
 	.selectAll("text")
 	.data(words)
 	.enter().append("text")
-	.style("font-size", function(d) { return d.size + "px"; })
+	.style("font-size", function(d) { return "10px"; })
 	.style("font-family", "Oswald")
 	.attr("text-anchor", "middle")
 	.attr("transform", function(d) {

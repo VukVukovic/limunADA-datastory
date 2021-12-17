@@ -1,5 +1,5 @@
 body {
-
+	background-color: #fcfcfc;
 }
 
 .wrapper {
@@ -34,11 +34,19 @@ svg * {
 	position: absolute;
 	width: 100%;
 	top: 0;
-	z-index: 3;
+	z-index: 999;
+	background-color: #BFD7EA;
+	border-bottom: 1px solid rgb(209, 225, 240);
+	-webkit-box-shadow: 0px 4px 2px -4px rgba(0,0,0,0.53); 
+	box-shadow: 0px 4px 2px -4px rgba(0,0,0,0.53);
+}
+
+.header-space {
+	height: 100px;
 }
 
 #logo {
-	height: 60px;
+	height: 50px;
 }
 
 #myMenu li {
@@ -52,11 +60,11 @@ svg * {
 
 #myMenu li a {
 	text-decoration: none;
-	color:  #fff;
+	color: #0B3954;
 }
 
 #myMenu li.active {
-	border-bottom: 3px solid #fff;
+	border-bottom: 3px solid #0B3954;
 	font-weight: 800;
 }
 
@@ -72,6 +80,17 @@ svg * {
 
 .font-raleway {
 	font-family: 'Raleway', sans-serif;
+	font-weight: 800;
+}
+
+.font-opensans {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 400;
+}
+
+.font-opensans-bold {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 700;
 }
 
 .circle {
@@ -106,4 +125,40 @@ svg * {
 
 .text-justify {
 	text-align: justify;
+}
+
+.section-grey {
+	background-color: #BFD7EA;
+}
+
+.color-subtlegreen {
+	color: #E0FF4F;
+}
+
+.color-subtlered {
+	color: #FF6663;
+}
+
+hr.subtlered {
+	border: 0;
+	height: 4px;
+	width: 50%;
+	position: relative;
+	margin: 20px auto;
+	background: #FF6663;
+	opacity: 1;
+}
+
+hr.subtlered:before {
+	content: "";
+	width: 20px;
+	height: 20px;
+	background: #FF6663;
+	display: inline-block;
+	border: 2px solid #FF6663;
+	border-radius: 50%;
+	position: absolute;
+	top: -8px;
+	left: 50%;
+	margin: 0 0 0 -10px;
 }

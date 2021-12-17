@@ -15,6 +15,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600;700;800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
 
   <!-- Bootstrap css -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -29,7 +30,7 @@
   <div id="header">
     <div class="d-flex flex-row justify-content-between align-items-center p-3">
       <img src="img/logo.png" id="logo" />
-      <ul id="myMenu">
+      <ul id="myMenu" class="mt-2">
         <li data-menuanchor="firstPage" class="active"><a href="#firstPage">Intro</a></li>
         <li data-menuanchor="secondPage"><a href="#secondPage">Topics</a></li>
         <li data-menuanchor="thirdPage"><a href="#thirdPage">Sentiment</a></li>
@@ -39,47 +40,99 @@
     </div>
   </div>
 
+  <div class="header-space"></div>
   <div id="fullpage">
-    <div class="section">
-      <div class="my-container">
-        <div class="h2 text-center font-raleway text-shadow text-uppercase" style="color:#f2f2f2">Datastory: Stance of US politicians on the major problems</div>
-        
+    <!-- INTRO -->
+    <div class="section fp-auto-height">
+      <div class="container">
+        <div class="h2 text-center font-raleway text-uppercase" style="color:#FF6663">Datastory: Stance of US politicians on the major problems</div>
+        <hr class="subtlered" />
+        <div class="row">
+          <img class="float-left w-100 mr-2 mb-2" style="max-width: 600px;" src="img/trump_hilari.png" />
+        </div>
+      </div>
+    </div>
+
+    <!-- CLUSTERS REPUBLICANS -->
+    <div class="section fp-auto-height">
+      <div class="container mt-5">
+        <div class="h2 text-center font-raleway text-uppercase" style="color:#FF6663">MAJOR TOPICS: REPUBLICANS</div>
+        <hr class="subtlered" />
+        <div class="row">
+          <div class="col-12 col-md-7">
+            <div id="clusters_democrates"></div>
+          </div>
+          <div class="col-12 col-md-5 align-items-center">
+            <div id="topic_democrates" class="h2 text-center font-opensans-bold"></div>
+            <div id="cloud_democrates"></div>
+            <div id="info_democrates" class="text-justify font-opensans"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section fp-auto-height">
+      <div class="container">
+        <canvas id="myChart" width="400" height="400"></canvas>
+      </div>
+      <br /><br /><br />
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.2/chart.min.js" integrity="sha512-tMabqarPtykgDtdtSqCL3uLVM0gS1ZkUAVhRFu1vSEFgvB73niFQWJuvviDyBGBH22Lcau4rHB5p2K2T0Xvr6Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      <script src="https://unpkg.com/chartjs-chart-wordcloud@3.6.0/build/index.umd.min.js"></script>
+
+      <script>
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const words = ['Hello', 'world', 'normally', 'you', 'want', 'more', 'words', 'than', 'this'];
+        const config = {
+  type: 'wordCloud',
+  data: {
+    // text
+    labels: words,
+    datasets: [
+      {
+        data: words.map(w => Math.random() * 50 + 30),
+        color: 'red'
+      },
+    ],
+  },
+  options: {
+    plugins : {
+      tooltip: {
+          enabled: false
+      },
+      legend: {
+        display: false
+      }
+    }
+  }
+};
+        const myChart = new Chart(ctx, config);
+        </script>
+
+    </div>
+    <div class="section fp-auto-height">
+      <div class="container p-3">
+        <div class="h2 text-center font-raleway text-uppercase" style="color:#FF6663">Meet the limunADA team</div>
+        <hr class="subtlered" />
         <div class="row justify-content-center">
-          <div class="col-6 col-md-2">
-            <img class="change circle img-fluid box-shadow" src="img/republicans_logo.png" data-hoverimg="img/republicans.png" />
+          <div class="col-6 col-md-3 text-center">
+            <img class="change circle img-fluid mb-2" src="img/jana.png" />
+            <span class="h3 text-uppercase font-raleway color-subtlered">Jana Vučković</span>
           </div>
-          <div class="col-6 col-md-2">
-            <img class="change circle img-fluid box-shadow" src="img/democrates_logo.png" data-hoverimg="img/democrates.png" />
+          <div class="col-6 col-md-3 text-center">
+            <img class="change circle img-fluid mb-2" src="img/gojko.png" />
+            <span class="h3 text-uppercase font-raleway color-subtlered">Gojko Čutura</span>
           </div>
-        </div>
-
-        <div class="">
-
-        </div>
-      </div>
-    </div>
-    <div class="section">
-      <div class="slide" data-anchor="slide1">
-        <div class="my-container">
-          <div class="row">
-            <div class="col-12 col-md-7">
-              <div id="clusters_democrates" style="width: 400px; height: 400px;"></div>
-            </div>
-            <div class="col-12 col-md-5 align-items-center">
-              <div id="topic_democrates" class="h2 text-center"></div>
-              <div id="cloud_democrates"></div>
-              <div id="info_democrates" class="text-justify"></div>
-            </div>
+          <div class="col-6 col-md-3 text-center">
+            <img class="change circle img-fluid mb-2" src="img/vuk.png" />
+            <span class="h3 text-uppercase font-raleway color-subtlered">Vuk Vuković</span>
+          </div>
+          <div class="col-6 col-md-3 text-center">
+            <img class="change circle img-fluid mb-2" src="img/milos.png" />
+            <span class="h3 text-uppercase font-raleway color-subtlered">Miloš Novaković</span>
           </div>
         </div>
       </div>
-      <div class="slide" data-anchor="slide2"><div class="container">Slide 2</div></div>
-      <div class="slide" data-anchor="slide3"><div class="container">Slide 3</div></div>
-      <div class="slide" data-anchor="slide4"><div class="container">Slide 4</div></div>
     </div>
-    <div class="section">Section 3</div>
-    <div class="section">Section 4</div>
-    <div class="section">Section 5</div>
   </div>
 
   <!-- jQuery -->
@@ -89,13 +142,15 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js" integrity="sha512-pax4MlgXjHEPfCwcJLQhigY7+N8rt6bVvWLFyUMuxShv170X53TRzGPmPkZmGBhk+jikR8WBM4yl7A9WMHHqvg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <!-- fullpage.js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.js" integrity="sha512-gSf3NCgs6wWEdztl1e6vUqtRP884ONnCNzCpomdoQ0xXsk06lrxJsR7jX5yM/qAGkPGsps+4bLV5IEjhOZX+gg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.js" integrity="sha512-gSf3NCgs6wWEdztl1e6vUqtRP884ONnCNzCpomdoQ0xXsk06lrxJsR7jX5yM/qAGkPGsps+4bLV5IEjhOZX+gg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>  -->
 
   <!-- d3.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.2.1/d3.min.js" integrity="sha512-wkduu4oQG74ySorPiSRStC0Zl8rQfjr/Ty6dMvYTmjZw6RS5bferdx8TR7ynxeh79ySEp/benIFFisKofMjPbg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <!-- d3-cloud -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-cloud/1.2.5/d3.layout.cloud.min.js" integrity="sha512-HjKxWye8lJGPu5q1u/ZYkHlJrJdm6KGr89E6tOrXeKm1mItb1xusPU8QPcKVhP8F9LjpZT7vsu1Fa+dQywP4eg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <!-- Chart.js -->
 
   <!-- Custom js -->
   <script src="script.js"></script>
