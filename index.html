@@ -5,9 +5,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Detection and analysis of the major topic addressed by US politicians</title>
+  <title>Detection and analysis of major topics addressed by US politicians</title>
 
-  <meta name="description" content="Detection and analysis of the major topic addressed by US politicians">
+  <meta name="description" content="Detection and analysis of major topics addressed by US politicians">
   <meta name="author" content="limunADA">
 
   <!-- Fonts -->
@@ -30,7 +30,7 @@
   <!-- INTRO -->
   <div class="section">
     <div class="container">
-      <div class="h2 text-center font-raleway text-uppercase mt-2" style="color:#FF6663">Detection and analysis of the major topic addressed by US politicians</div>
+      <div class="h2 text-center font-raleway text-uppercase mt-2" style="color:#FF6663">Detection and analysis of major topics addressed by US politicians</div>
       <hr class="subtlered" />
 
       <div class="row">
@@ -199,7 +199,7 @@ This gives us an insight into what topics were presented mostly in US media. Mor
   <!-- Team  -->
   <div class="section">
     <div class="container p-3 mt-3">
-      <div class="h2 text-center font-raleway text-uppercase" style="color:#FF6663">Conclusion & References</div>
+      <div class="h2 text-center font-raleway text-uppercase" style="color:#FF6663">References</div>
       <hr class="subtlered" />
       <div class="row justify-content-center">
         
@@ -274,7 +274,7 @@ This gives us an insight into what topics were presented mostly in US media. Mor
       $('.carousel').carousel()
       
       createClusterDisplay(data_topics_democrates, 'radios_democrates', 'clusters_democrates', 'topic_democrates', 'cloud_democrates', 'info_democrates');
-      //createClusterDisplay(data_topics_republicans, 'radios_republicans', 'clusters_republicans', 'topic_republicans', 'cloud_republicans', 'info_republicans');
+      createClusterDisplay(data_topics_republicans, 'radios_republicans', 'clusters_republicans', 'topic_republicans', 'cloud_republicans', 'info_republicans');
 
       const topicTrends = [
       {"topic":"Politics", "data_topics": ["politics"], "text": "Elections in the US were held in 2016, which makes a huge peak of political quotations in that same year, after which we see a huge decay. During the following three years we see an almost linear increase in interest in politics, which might imply that parties started their pre-election campaign. So, in 2020, when another election was held, there must have been a huge peak again! However, we see a decrease in the percentages of quotes related to politics. Why is that? Before you think that there is some mistake here, we remind you that these are percentages of quotes that are related to politics. So, in 2020, there must have been some topic that was so important, even more, important than elections in the US. Unfortunately, we all know what that is. The year 2020 will always be known as a year of break out of COVID-19."},

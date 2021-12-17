@@ -197,16 +197,17 @@ function plotTopicTrends(research_data, topics, trends_id) {
 		const labels = years;
 		const data = {
 		labels: labels,
-			datasets: [{
-				label: 'Democrats',
-				data: years.map(y => research_data['democrates'][y][t]),
-				fill: false,
-				borderColor: '#0B3954',
-				tension: 0.1
-			}, 
+			datasets: [ 
 			{
 				label: 'Republicans',
 				data: years.map(y => research_data['republicans'][y][t]),
+				fill: false,
+				borderColor: '#0B3954',
+				tension: 0.1
+			},
+			{
+				label: 'Democrats',
+				data: years.map(y => research_data['democrates'][y][t]),
 				fill: false,
 				borderColor: '#E0FF4F',
 				tension: 0.1
